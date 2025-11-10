@@ -25,12 +25,6 @@ def dna_to_protein(dna_sequence):
             break
         protein += amino_acid
     return protein
-  
-from google.colab import files
-uploaded = files.upload()
-
-import seaborn as sns
-import pandas as pd
 
 # a function for determining the Hamming distance between two strings
 #making both strings same length
@@ -89,6 +83,8 @@ plt.axvline(x = -1, color = 'black', linestyle = '--')
 
 # Surprise task B
 # Load the dataset from the uploaded file
+from google.colab import files
+uploaded = files.upload()
 df = pd.read_csv('Breast Cancer Wisconsin Dataset (1).txt')
 
 print(df.head(5))
