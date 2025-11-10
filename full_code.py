@@ -32,6 +32,61 @@ uploaded = files.upload()
 import seaborn as sns
 import pandas as pd
 
+# a function for determining the Hamming distance between two strings
+#making both strings same length
+def hamming_distance(str1, str2):
+  max_len = max(len(str1), len(str2))
+  str1 = str1.ljust(max_len)
+  str2 = str2.ljust(max_len)
+
+  distance = 0
+  for i in range(max_len):
+    if str1[i] != str2[i]:
+      distance += 1
+  return distance
+
+#usernames
+slack_username = " Rama Jhowry"
+twitter_handle = "@lord_chipo"
+
+#calculate the hamming distance of Slack username and Twitter handle
+distance = hamming_distance(slack_username, twitter_handle)
+
+#print the output
+print(f"The Hamming distance between'{slack_username}' and '{twitter_handle}' is {distance}.")
+
+# Surprise task A
+# Install and import the required libraries
+!pip install pandas
+!pip install seaborn
+import pandas as pd
+import seaborn as sns
+
+# Import the task A part (a) dataset into the environment
+data_source = "https://raw.githubusercontent.com/HackBio-Internship/2025_project_collection/refs/heads/main/Python/Dataset/hbr_uhr_top_deg_normalized_counts.csv" # provides URL to the data
+df = pd.read_csv(data_source, index_col = 'Unnamed: 0') # loads the data into a pandas data frame
+
+# visualize the data frame
+df
+
+# Create a clustered heatmap
+sns.clustermap(df, cmap = 'Blues', figsize = (7,7))
+
+# Import dataset for Task A part (b)
+data_source2 = "https://raw.githubusercontent.com/HackBio-Internship/2025_project_collection/refs/heads/main/Python/Dataset/hbr_uhr_deg_chr22_with_significance.csv" # provides URL to the data
+df_2 = pd.read_csv(data_source2, index_col = 'name') # loads the data into a pandas data frame
+
+# visualize the data frame
+df_2
+
+# create a volcano plot from df_2
+v_plot = sns.scatterplot(df_2, x = 'log2FoldChange', y = '-log10PAdj', hue = 'significance', palette = {'down':'orange', 'ns':'grey', 'up':'green'})
+
+# add dashed vertical lines at log2FoldChange = ±1
+import matplotlib.pyplot as plt
+plt.axvline(x = 1, color = 'black', linestyle = '--')
+plt.axvline(x = -1, color = 'black', linestyle = '--')
+
 # Surprise task B
 # Load the dataset from the uploaded file
 df = pd.read_csv('Breast Cancer Wisconsin Dataset (1).txt')
@@ -41,9 +96,6 @@ print(df.head(5))
 print(df.shape)
 
 """# **Scatter Plot**"""
-
-import matplotlib.pyplot as plt
-
 plt.figure(figsize=(8, 6))
 sns.scatterplot(data=df,
                 x="radius_mean",
